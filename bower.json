@@ -1,0 +1,22 @@
+{
+  "name": "H5F",
+  "version": "1.0.1",
+  "main": "h5f.js",
+  "homepage": "http://www.thecssninja.com/javascript/H5F",
+  "authors": [
+    "Ryan Seddon (http://www.thecssninja.com)"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "cdn/vendor",
+    "test",
+    "tests"
+  ]
+}
