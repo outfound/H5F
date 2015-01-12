@@ -309,8 +309,8 @@
     preventActions = function (evt) {
         evt = evt || window.event;
 
-        if(evt.stopPropagation && evt.preventDefault) {
-            evt.stopPropagation();
+        if(evt.stopImmediatePropagation && evt.preventDefault) {
+            evt.stopImmediatePropagation();
             evt.preventDefault();
         } else {
             evt.cancelBubble = true;
