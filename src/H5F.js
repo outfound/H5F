@@ -25,6 +25,11 @@
         setup, validation, validity, checkField, bypassChecks, checkValidity, setCustomValidity, support, pattern, placeholder, range, required, valueMissing, listen, unlisten, preventActions, getTarget, addClass, removeClass, isHostMethod, isSiblingChecked;
 
     setup = function(form, settings) {
+
+        if(support()) {
+            return;
+        }
+
         var isCollection = !form.nodeType || false;
 
         var opts = {
@@ -76,6 +81,10 @@
             args.onSubmit.call(form, e);
         },false);
 
+
+
+
+
         if(!support()) {
             form.checkValidity = function() { return checkValidity(form); };
 
@@ -87,6 +96,10 @@
                 }
             }
         }
+
+
+
+
     };
     validity = function(el) {
         var elem = el,
