@@ -20,13 +20,32 @@
         emailPatt = /^[a-zA-Z0-9.!#$%&'*+-\/=?\^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
         urlPatt = /[a-z][\-\.+a-z]*:\/\//i,
         nodes = /^(input|select|textarea)$/i,
+        hasInteractiveFormValidation = false,
         isSubmit, bypassSubmit, usrPatt, curEvt, args,
         // Methods
         setup, validation, validity, checkField, bypassChecks, checkValidity, setCustomValidity, support, pattern, placeholder, range, required, valueMissing, listen, unlisten, preventActions, getTarget, addClass, removeClass, isHostMethod, isSiblingChecked;
 
+    //create a hidden form to test for interactive validation
+    var form = document.createElement('form');
+    form.hidden = true;
+    form.innerHTML = '<input name="test" required><button></button>';
+    document.body.appendChild(form);
+
+    var input = form.getElementsByTagName('input')[0];
+    // Record whether "invalid" event is fired
+    input.addEventListener('invalid', function(e) {
+        hasInteractiveFormValidation = true;
+        e.preventDefault();
+        e.stopPropagation();
+    }, false);
+
+    // Submit form by clicking submit button
+    form.getElementsByTagName('button')[0].click();
+
     setup = function(form, settings) {
 
-        if(support()) {
+        // don't do anything if the browser already has support
+        if (hasInteractiveFormValidation) {
             return;
         }
 
