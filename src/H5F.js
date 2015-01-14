@@ -25,15 +25,21 @@
         // Methods
         setup, validation, validity, checkField, bypassChecks, checkValidity, setCustomValidity, support, pattern, placeholder, range, required, valueMissing, listen, unlisten, preventActions, getTarget, addClass, removeClass, isHostMethod, isSiblingChecked;
 
-    //create a hidden form to test for interactive validation
+    // Big shouts to Modernizr for this code.
+    // create a hidden form to test for interactive validation
     var testForm = document.createElement('form');
     testForm.hidden = true;
     testForm.innerHTML = '<input name="test" required><button></button>';
     document.body.appendChild(testForm);
 
+    testForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }, false);
+
     var testInput = testForm.getElementsByTagName('input')[0];
     // Record whether "invalid" event is fired
-    testInput.addEventListener('invalid', function(e) {
+    testInput.addEventListener('invalid', function (e) {
         document.body.removeChild(testForm);
         hasInteractiveFormValidation = true;
         e.preventDefault();
