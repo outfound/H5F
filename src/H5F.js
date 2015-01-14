@@ -26,21 +26,22 @@
         setup, validation, validity, checkField, bypassChecks, checkValidity, setCustomValidity, support, pattern, placeholder, range, required, valueMissing, listen, unlisten, preventActions, getTarget, addClass, removeClass, isHostMethod, isSiblingChecked;
 
     //create a hidden form to test for interactive validation
-    var form = document.createElement('form');
-    form.hidden = true;
-    form.innerHTML = '<input name="test" required><button></button>';
-    document.body.appendChild(form);
+    var testForm = document.createElement('form');
+    testForm.hidden = true;
+    testForm.innerHTML = '<input name="test" required><button></button>';
+    document.body.appendChild(testForm);
 
-    var input = form.getElementsByTagName('input')[0];
+    var testInput = testForm.getElementsByTagName('input')[0];
     // Record whether "invalid" event is fired
-    input.addEventListener('invalid', function(e) {
+    testInput.addEventListener('invalid', function(e) {
+        document.body.removeChild(testForm);
         hasInteractiveFormValidation = true;
         e.preventDefault();
         e.stopPropagation();
     }, false);
 
     // Submit form by clicking submit button
-    form.getElementsByTagName('button')[0].click();
+    testForm.getElementsByTagName('button')[0].click();
 
     setup = function(form, settings) {
 
