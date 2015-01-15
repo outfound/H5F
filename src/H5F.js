@@ -33,6 +33,7 @@
     document.body.appendChild(testForm);
 
     testForm.addEventListener('submit', function (e) {
+        document.body.removeChild(testForm);
         e.preventDefault();
         e.stopPropagation();
     }, false);
@@ -40,7 +41,6 @@
     var testInput = testForm.getElementsByTagName('input')[0];
     // Record whether "invalid" event is fired
     testInput.addEventListener('invalid', function (e) {
-        document.body.removeChild(testForm);
         hasInteractiveFormValidation = true;
         e.preventDefault();
         e.stopPropagation();
