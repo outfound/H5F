@@ -25,14 +25,13 @@
         // Methods
         setup, validation, validity, checkField, bypassChecks, checkValidity, setCustomValidity, support, pattern, placeholder, range, required, valueMissing, listen, unlisten, preventActions, getTarget, addClass, removeClass, isHostMethod, isSiblingChecked;
 
-    // Big shouts to Modernizr for this code.
-    // create a hidden form to test for interactive validation
-    var testForm = document.createElement('form');
-    testForm.hidden = true;
-    testForm.innerHTML = '<input name="test" required><button></button>';
-    document.body.appendChild(testForm);
-
+    // Big shouts to Modernizr for the initial code.
+    // Create a hidden form to test for interactive validation
+    var testSpan = document.createElement('span');
+    testSpan.innerHTML = '<form hidden><input name="test" required><button></button></form>';
+    var testForm = testSpan.getElementsByTagName('form')[0];
     testForm.addEventListener('submit', function (e) {
+        console.info('Browser DOES NOT HAVE hasInteractiveFormValidation');
         document.body.removeChild(testForm);
         e.preventDefault();
         e.stopPropagation();
@@ -41,12 +40,15 @@
     var testInput = testForm.getElementsByTagName('input')[0];
     // Record whether "invalid" event is fired
     testInput.addEventListener('invalid', function (e) {
+        console.info('Browser hasInteractiveFormValidation');
+        document.body.removeChild(testForm);
         hasInteractiveFormValidation = true;
         e.preventDefault();
         e.stopPropagation();
     }, false);
 
     // Submit form by clicking submit button
+    document.body.appendChild(testForm);
     testForm.getElementsByTagName('button')[0].click();
 
     setup = function(form, settings) {
