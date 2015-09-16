@@ -31,7 +31,6 @@
     testSpan.innerHTML = '<form hidden><input name="test" required><button></button></form>';
     var testForm = testSpan.getElementsByTagName('form')[0];
     testForm.addEventListener('submit', function (e) {
-        console.info('Browser DOES NOT HAVE hasInteractiveFormValidation');
         document.body.removeChild(testForm);
         e.preventDefault();
         e.stopPropagation();
@@ -40,7 +39,6 @@
     var testInput = testForm.getElementsByTagName('input')[0];
     // Record whether "invalid" event is fired
     testInput.addEventListener('invalid', function (e) {
-        console.info('Browser hasInteractiveFormValidation');
         document.body.removeChild(testForm);
         hasInteractiveFormValidation = true;
         e.preventDefault();
